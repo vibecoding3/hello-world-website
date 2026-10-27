@@ -50,17 +50,40 @@
   </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
-  // Test that JavaScript is running
-  document.getElementById("message").textContent =
-    "JavaScript loaded successfully!";
+  const message = document.getElementById("message");
 
-  function sayHello() {
-    const message = document.getElementById("message");
-    message.textContent = "Button clicked successfully!";
+  async function sayHello() {
+    message.textContent = "Connecting to Supabase...";
+
+    try {
+      if (!window.supabase) {
+        throw new Error("Supabase library failed to load.");
+      }
+
+      const client = window.supabase.createClient(
+        "https://fraczbsgclhvxyblftvu.supabase.co",
+        "sb_publishable_Cfhzws7gNeQSLGugT7br9w_RqozoNWJ"
+      );
+
+      const { data, error } = await client
+        .from("hello_messages")
+        .select("message")
+        .limit(1);
+
+      if (error) throw error;
+
+      message.textContent = data.length
+        ? data[0].message
+        : "Connected! No messages found yet.";
+
+    } catch (error) {
+      console.error("Supabase error:", error);
+      message.textContent = "Error: " + error.message;
+    }
   }
 </script>
+
 
 
 </body>
