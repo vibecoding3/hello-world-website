@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      color: #172033;
+      background: linear-gradient(135deg, #e0f2fe, #f5f3ff);
+    }
+
+    main {
+      text-align: center;
+      background: white;
+      padding: 48px 32px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px #17203315;
+      max-width: 440px;
+      margin: 20px;
+    }
+
+    h1 { font-size: 2.5rem; }
+    p { line-height: 1.7; color: #64748b; }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 20px;
+      background: #2563eb;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Hello, world! 👋</h1>
+    <p>My first website is online. Built with GitHub,
+       Vercel and Supabase.</p>
+    <button onclick="sayHello()">Click me</button>
+    <p id="message">Ready to get started?</p>
+  </main>
+
+  <script>
+    function sayHello() {
+      document.getElementById("message").textContent =
+        "It works! 🎉 You just ran JavaScript.";
+    }
+  </script>
+</body>
+</html>
