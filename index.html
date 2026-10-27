@@ -48,12 +48,34 @@
     <button onclick="sayHello()">Click me</button>
     <p id="message">Ready to get started?</p>
   </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
-    function sayHello() {
-      document.getElementById("message").textContent =
-        "It works! 🎉 You just ran JavaScript.";
+<script>
+  const supabase = window.supabase.createClient(
+    "https://fraczbsgclhvxyblftvu.supabase.co",
+    "sb_publishable_Cfhzws7gNeQSLGugT7br9w_RqozoNWJ"
+  );
+
+  async function sayHello() {
+    const message = document.getElementById("message");
+    message.textContent = "Connecting...";
+
+    const { data, error } = await supabase
+      .from("hello_messages")
+      .select("message")
+      .limit(1);
+
+    if (error) {
+      message.textContent = "Connection failed. Check your setup.";
+      console.error(error);
+      return;
     }
-  </script>
+
+    message.textContent = data.length
+      ? data[0].message
+      : "Connected, but no messages found.";
+  }
+</script>
+
 </body>
 </html>
